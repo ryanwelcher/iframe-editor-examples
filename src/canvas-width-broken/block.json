@@ -1,0 +1,12 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "iframed-demos/canvas-width-broken",
+	"version": "0.1.0",
+	"title": "Canvas Width (Broken)",
+	"category": "widgets",
+	"icon": "warning",
+	"description": "Reads window.innerWidth from the global window. In the iframed editor it reports the admin window width, not the canvas.",
+	"textdomain": "iframed-editor-demos",
+	"editorScript": "file:./index.js"
+}

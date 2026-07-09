@@ -1,0 +1,18 @@
+{
+	"name": "ryanwelcher/iframed-editor-demos",
+	"description": "Companion demo blocks for the WordPress 7.1 iframed post editor changes.",
+	"license": "GPL-2.0-or-later",
+	"require-dev": {
+		"wp-coding-standards/wpcs": "^3.1",
+		"dealerdirect/phpcodesniffer-composer-installer": "^1.0"
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	},
+	"scripts": {
+		"lint": "phpcs",
+		"format": "phpcbf"
+	}
+}

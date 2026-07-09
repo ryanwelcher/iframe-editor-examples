@@ -1,0 +1,12 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "iframed-demos/click-outside-broken",
+	"version": "0.1.0",
+	"title": "Click Outside (Broken)",
+	"category": "widgets",
+	"icon": "warning",
+	"description": "A dropdown that closes on outside click — but the listener is on the global document, so clicks inside the iframed canvas never reach it.",
+	"textdomain": "iframed-editor-demos",
+	"editorScript": "file:./index.js"
+}

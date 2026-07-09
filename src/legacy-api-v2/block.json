@@ -1,0 +1,11 @@
+{
+	"apiVersion": 2,
+	"name": "iframed-demos/legacy-api-v2",
+	"version": "0.1.0",
+	"title": "Legacy API v2 Block",
+	"category": "widgets",
+	"icon": "backup",
+	"description": "A block still on apiVersion 2. In WordPress 7.0, inserting it removes the iframe from the post editor. In 6.9+ it logs a console warning when SCRIPT_DEBUG is on.",
+	"textdomain": "iframed-editor-demos",
+	"editorScript": "file:./index.js"
+}

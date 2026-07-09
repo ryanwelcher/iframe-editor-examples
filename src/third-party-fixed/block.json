@@ -1,0 +1,12 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "iframed-demos/third-party-fixed",
+	"version": "0.1.0",
+	"title": "Third-Party Library (Fixed)",
+	"category": "widgets",
+	"icon": "yes-alt",
+	"description": "Uses the patched library, which resolves the correct document from the element it is handed — the patch-package technique.",
+	"textdomain": "iframed-editor-demos",
+	"editorScript": "file:./index.js"
+}

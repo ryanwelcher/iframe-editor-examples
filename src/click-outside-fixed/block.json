@@ -1,0 +1,12 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "iframed-demos/click-outside-fixed",
+	"version": "0.1.0",
+	"title": "Click Outside (Fixed)",
+	"category": "widgets",
+	"icon": "yes-alt",
+	"description": "The same dropdown, but the listener is attached to the block element's ownerDocument, so it works in and out of the iframe.",
+	"textdomain": "iframed-editor-demos",
+	"editorScript": "file:./index.js"
+}

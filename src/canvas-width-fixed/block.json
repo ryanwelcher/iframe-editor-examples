@@ -1,0 +1,12 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "iframed-demos/canvas-width-fixed",
+	"version": "0.1.0",
+	"title": "Canvas Width (Fixed)",
+	"category": "widgets",
+	"icon": "yes-alt",
+	"description": "Reads the width from the block element's ownerDocument.defaultView, so it always measures the actual editor canvas.",
+	"textdomain": "iframed-editor-demos",
+	"editorScript": "file:./index.js"
+}

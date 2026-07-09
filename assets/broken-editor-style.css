@@ -1,0 +1,16 @@
+/*
+ * ❌ Enqueued from PHP via `enqueue_block_editor_assets`.
+ *
+ * This hook loads assets in the ADMIN page, not inside the editor canvas
+ * iframe. When the post editor is iframed, this banner disappears —
+ * the stylesheet is loaded, but the block lives in a different document.
+ */
+.ied-editor-styles-demo::after {
+	content: '❌ styled via enqueue_block_editor_assets — you will NOT see me in the iframed editor';
+	display: block;
+	background: #cc1818;
+	color: #fff;
+	padding: 0.25rem 0.5rem;
+	margin-top: 0.5rem;
+	font-size: 0.8rem;
+}

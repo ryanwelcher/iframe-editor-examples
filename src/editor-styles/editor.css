@@ -1,0 +1,19 @@
+/*
+ * ✅ Registered via `editorStyle` in block.json — WordPress copies block
+ * styles into the canvas iframe, so this always applies.
+ */
+.ied-editor-styles-demo {
+	border: 2px solid #00a32a;
+	border-radius: 4px;
+	padding: 1rem;
+}
+
+.ied-editor-styles-demo::before {
+	content: '✅ styled via editorStyle in block.json';
+	display: block;
+	background: #00a32a;
+	color: #fff;
+	padding: 0.25rem 0.5rem;
+	margin-bottom: 0.5rem;
+	font-size: 0.8rem;
+}

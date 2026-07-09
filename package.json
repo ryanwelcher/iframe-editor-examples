@@ -1,0 +1,21 @@
+{
+	"name": "iframed-editor-demos",
+	"version": "0.1.0",
+	"description": "Companion demo blocks for the WordPress 7.1 iframed post editor changes.",
+	"author": "Ryan Welcher",
+	"license": "GPL-2.0-or-later",
+	"scripts": {
+		"build": "wp-scripts build",
+		"start": "wp-scripts start",
+		"lint:js": "wp-scripts lint-js",
+		"plugin-zip": "wp-scripts plugin-zip"
+	},
+	"files": [
+		"iframed-editor-demos.php",
+		"build",
+		"assets"
+	],
+	"devDependencies": {
+		"@wordpress/scripts": "^30.0.0"
+	}
+}

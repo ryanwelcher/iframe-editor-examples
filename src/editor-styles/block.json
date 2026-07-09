@@ -1,0 +1,13 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "iframed-demos/editor-styles",
+	"version": "0.1.0",
+	"title": "Editor Styles Demo",
+	"category": "widgets",
+	"icon": "admin-appearance",
+	"description": "Shows which editor styles survive the iframe: block.json editorStyle does, enqueue_block_editor_assets does not.",
+	"textdomain": "iframed-editor-demos",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css"
+}
