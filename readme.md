@@ -49,7 +49,13 @@ cp .wp-env.override.example.json .wp-env.override.json
 npx wp-env start --update
 ```
 
-Or use the Playground blueprint in `_playground/blueprint.json` (requires a release zip on GitHub — see the URL inside).
+### Try it in Playground
+
+No local setup required — launch the demos in WordPress Playground:
+
+**[▶️ Open in Playground](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/ryanwelcher/iframe-editor-examples/trunk/_playground/blueprint.json)**
+
+The blueprint (`_playground/blueprint.json`) installs this plugin plus the Gutenberg plugin (so the iframe is enforced) and drops you in a new post. Note: it installs the plugin from the latest GitHub release zip, so a release asset named `iframed-editor-demos.zip` must exist (`npm run plugin-zip` builds it).
 
 ## References
 
