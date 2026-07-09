@@ -2,4 +2,5 @@ node_modules
 build
 vendor
 *.zip
+!/iframed-editor-demos.zip
 .DS_Store

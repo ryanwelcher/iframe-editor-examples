@@ -55,7 +55,7 @@ No local setup required — launch the demos in WordPress Playground:
 
 **[▶️ Open in Playground](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/ryanwelcher/iframe-editor-examples/trunk/_playground/blueprint.json)**
 
-The blueprint (`_playground/blueprint.json`) installs this plugin plus the Gutenberg plugin (so the iframe is enforced) and drops you in a new post. Note: it installs the plugin from the latest GitHub release zip, so a release asset named `iframed-editor-demos.zip` must exist (`npm run plugin-zip` builds it).
+The blueprint (`_playground/blueprint.json`) installs this plugin plus the Gutenberg plugin (so the iframe is enforced) and drops you in a new post. Note: it installs the plugin from the `iframed-editor-demos.zip` committed to this repo (served via `raw.githubusercontent.com`, which sends the CORS headers Playground needs — GitHub release assets don't). Rebuild it with `npm run plugin-zip` and commit the result whenever the blocks change.
 
 ## References
 

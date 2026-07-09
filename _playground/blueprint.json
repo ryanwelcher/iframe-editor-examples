@@ -21,7 +21,7 @@
 			"step": "installPlugin",
 			"pluginData": {
 				"resource": "url",
-				"url": "https://github-proxy.com/proxy/?repo=ryanwelcher/iframe-editor-examples&release=latest&asset=iframed-editor-demos.zip"
+				"url": "https://raw.githubusercontent.com/ryanwelcher/iframe-editor-examples/trunk/iframed-editor-demos.zip"
 			},
 			"options": {
 				"activate": true
