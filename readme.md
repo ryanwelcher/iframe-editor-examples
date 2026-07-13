@@ -19,6 +19,7 @@ Companion plugin for the article/video on the iframed post editor changes landin
 | ❌/✅ **Canvas Width** | Broken: reads `window.innerWidth` from the global (admin) window — wrong number, never updates with the canvas. Fixed: `element.ownerDocument.defaultView` via `useRefEffect`. Toggle Tablet/Mobile preview to compare. |
 | ❌/✅ **Click Outside** | Broken: "close dropdown on outside click" bound to the global `document` — canvas clicks never reach it (admin clicks do — enjoy the weirdness). Fixed: listener on `element.ownerDocument`. |
 | **Editor Styles Demo** | Two banners: green from `editorStyle` in `block.json` (injected into the iframe — survives), red from `enqueue_block_editor_assets` (admin page only — vanishes when iframed). Count the banners to know where you are. |
+| ❌/✅ **Admin-Scoped CSS** | Broken: editor styles scoped with `.wp-admin` — injected into the iframe, but the selector never matches the canvas body, so the border + banner silently vanish when iframed. Fixed: scope to the block's own class, no admin ancestor — styling survives everywhere. |
 | ❌/✅ **Third-Party Library** | Broken: a legacy lib resolves a selector against the global `document` — finds nothing inside the iframe, silently no-ops. Fixed: the lib is "patched" (the `patch-package` technique) to resolve the document from an element. |
 
 ## The demo script

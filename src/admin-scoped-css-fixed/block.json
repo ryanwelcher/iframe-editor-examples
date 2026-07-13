@@ -1,0 +1,13 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "iframed-demos/admin-scoped-css-fixed",
+	"version": "0.1.0",
+	"title": "Admin-Scoped CSS (Fixed)",
+	"category": "widgets",
+	"icon": "yes-alt",
+	"description": "Scopes editor styles to the block's own class instead of the admin body class, so the styling applies whether the canvas is iframed or not.",
+	"textdomain": "iframed-editor-demos",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css"
+}

@@ -1,0 +1,29 @@
+/*
+ * ❌ BROKEN in the iframed editor.
+ *
+ * This stylesheet is registered via `editorStyle` in block.json, so
+ * WordPress DOES inject it into the canvas iframe. Loading is not the
+ * problem here — the SELECTOR is.
+ *
+ * `.wp-admin` is a class on the admin page's <body>. When the editor is
+ * NOT iframed, the block lives inside that body, so `.wp-admin .ied-…`
+ * matches and the styling applies. When the editor IS iframed, the block
+ * lives in the canvas iframe's document, whose <body> has no `wp-admin`
+ * class — so the selector matches nothing and every rule below silently
+ * drops. Same block, same stylesheet, styling gone.
+ */
+.wp-admin .ied-admin-scoped-broken {
+	border: 2px solid #cc1818;
+	border-radius: 4px;
+	padding: 1rem;
+}
+
+.wp-admin .ied-admin-scoped-broken::before {
+	content: '❌ .wp-admin matched — the editor is NOT iframed';
+	display: block;
+	background: #cc1818;
+	color: #fff;
+	padding: 0.25rem 0.5rem;
+	margin-bottom: 0.5rem;
+	font-size: 0.8rem;
+}

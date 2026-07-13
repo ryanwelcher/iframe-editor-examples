@@ -1,0 +1,24 @@
+/*
+ * ✅ FIXED for the iframed editor.
+ *
+ * The fix is the same principle as the JavaScript demos: stop describing
+ * the admin, start describing your block. There's no `.wp-admin` ancestor
+ * in the selector, so it matches inside the canvas iframe just as well as
+ * it does in the admin page. The chrome the old selector reached for was
+ * never needed — deleting it IS the fix.
+ */
+.ied-admin-scoped-fixed {
+	border: 2px solid #00a32a;
+	border-radius: 4px;
+	padding: 1rem;
+}
+
+.ied-admin-scoped-fixed::before {
+	content: '✅ styled by .ied-admin-scoped-fixed — works iframed or not';
+	display: block;
+	background: #00a32a;
+	color: #fff;
+	padding: 0.25rem 0.5rem;
+	margin-bottom: 0.5rem;
+	font-size: 0.8rem;
+}
