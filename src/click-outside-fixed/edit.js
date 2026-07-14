@@ -9,6 +9,7 @@ import { useBlockProps } from '@wordpress/block-editor';
 import { useState } from '@wordpress/element';
 import { useRefEffect } from '@wordpress/compose';
 import { __ } from '@wordpress/i18n';
+import { BlockHeader } from '../lib/iframe-status';
 
 const wrapperStyle = {
 	border: '2px solid #00a32a',
@@ -26,9 +27,13 @@ const menuStyle = {
 
 export default function Edit() {
 	const [ isOpen, setIsOpen ] = useState( false );
+	const [ isIframed, setIsIframed ] = useState( false );
 
 	const ref = useRefEffect(
 		( element ) => {
+			// The canvas is iframed when this block's document is not the admin document.
+			setIsIframed( element.ownerDocument !== document );
+
 			if ( ! isOpen ) {
 				return;
 			}
@@ -51,7 +56,9 @@ export default function Edit() {
 
 	return (
 		<div { ...useBlockProps( { ref, style: wrapperStyle } ) }>
-			<strong>{ __( '✅ Click Outside (Fixed)', 'iframed-editor-demos' ) }</strong>
+			<BlockHeader isIframed={ isIframed }>
+				{ __( '✅ Click Outside (Fixed)', 'iframed-editor-demos' ) }
+			</BlockHeader>
 			<p>
 				<button type="button" onClick={ () => setIsOpen( ! isOpen ) }>
 					{ __( 'Toggle dropdown', 'iframed-editor-demos' ) }
@@ -65,6 +72,17 @@ export default function Edit() {
 					) }
 				</div>
 			) }
+			<p>
+				{ isIframed
+					? __(
+							'The listener is on the canvas document, so outside-click still works. That is the fix.',
+							'iframed-editor-demos'
+					  )
+					: __(
+							'Outside-click works here too, because the listener follows the block instead of assuming the admin document.',
+							'iframed-editor-demos'
+					  ) }
+			</p>
 		</div>
 	);
 }

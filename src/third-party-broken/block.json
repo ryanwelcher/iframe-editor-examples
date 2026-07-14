@@ -6,7 +6,7 @@
 	"title": "Third-Party Library (Broken)",
 	"category": "widgets",
 	"icon": "warning",
-	"description": "Initializes a legacy library that queries the global document. Inside the iframed canvas the library finds nothing and silently does nothing.",
+	"description": "Initializes a legacy library that queries the global document. Inside the canvas document the library finds nothing and silently does nothing.",
 	"textdomain": "iframed-editor-demos",
 	"editorScript": "file:./index.js"
 }

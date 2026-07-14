@@ -54,11 +54,11 @@ function IframeStatusNotice() {
 			iframed ? 'success' : 'warning',
 			iframed
 				? __(
-						'Editor canvas IS iframed.',
+						'The editor canvas IS iframed.',
 						'iframed-editor-demos'
 				  )
 				: __(
-						'Editor canvas is NOT iframed.',
+						'The editor canvas is NOT iframed.',
 						'iframed-editor-demos'
 				  ),
 			{

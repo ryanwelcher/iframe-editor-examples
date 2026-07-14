@@ -3,16 +3,18 @@
  *
  * A classic "close the dropdown when clicking outside" pattern, with the
  * listener attached to the global `document`. In the iframed editor,
- * clicks inside the canvas happen in the IFRAME's document — they never
+ * clicks inside the canvas happen in the canvas document — they never
  * bubble to the admin document, so this listener never sees them.
  *
  * The weird part: clicking the admin sidebar still closes it. Clicking
  * another block in the canvas does not. Same code works perfectly in the
- * non-iframed editor.
+ * non-iframed editor, where the whole editor shares one document.
  */
 import { useBlockProps } from '@wordpress/block-editor';
 import { useEffect, useRef, useState } from '@wordpress/element';
+import { useRefEffect } from '@wordpress/compose';
 import { __ } from '@wordpress/i18n';
+import { BlockHeader } from '../lib/iframe-status';
 
 const wrapperStyle = {
 	border: '2px solid #cc1818',
@@ -30,7 +32,18 @@ const menuStyle = {
 
 export default function Edit() {
 	const [ isOpen, setIsOpen ] = useState( false );
-	const containerRef = useRef();
+	const [ isIframed, setIsIframed ] = useState( false );
+	const elementRef = useRef();
+
+	// Capture the block element for the outside-click test, and report
+	// whether the block's document is the admin document.
+	const ref = useRefEffect( ( element ) => {
+		elementRef.current = element;
+		setIsIframed( element.ownerDocument !== document );
+		return () => {
+			elementRef.current = null;
+		};
+	}, [] );
 
 	useEffect( () => {
 		if ( ! isOpen ) {
@@ -38,19 +51,24 @@ export default function Edit() {
 		}
 
 		const closeOnOutsideClick = ( event ) => {
-			if ( ! containerRef.current.contains( event.target ) ) {
+			if (
+				elementRef.current &&
+				! elementRef.current.contains( event.target )
+			) {
 				setIsOpen( false );
 			}
 		};
 
-		// ❌ `document` is the admin document. Canvas clicks never bubble here.
+		// ❌ `document` is the admin document. Canvas-document clicks never bubble here.
 		document.addEventListener( 'click', closeOnOutsideClick );
 		return () => document.removeEventListener( 'click', closeOnOutsideClick );
 	}, [ isOpen ] );
 
 	return (
-		<div { ...useBlockProps( { ref: containerRef, style: wrapperStyle } ) }>
-			<strong>{ __( '❌ Click Outside (Broken)', 'iframed-editor-demos' ) }</strong>
+		<div { ...useBlockProps( { ref, style: wrapperStyle } ) }>
+			<BlockHeader isIframed={ isIframed }>
+				{ __( '❌ Click Outside (Broken)', 'iframed-editor-demos' ) }
+			</BlockHeader>
 			<p>
 				<button type="button" onClick={ () => setIsOpen( ! isOpen ) }>
 					{ __( 'Toggle dropdown', 'iframed-editor-demos' ) }
@@ -64,6 +82,17 @@ export default function Edit() {
 					) }
 				</div>
 			) }
+			<p>
+				{ isIframed
+					? __(
+							'The listener is on the admin document, so clicks in the canvas document never reach it. That is the bug.',
+							'iframed-editor-demos'
+					  )
+					: __(
+							'The whole editor shares one document, so outside-click works here. It breaks once the canvas is iframed.',
+							'iframed-editor-demos'
+					  ) }
+			</p>
 		</div>
 	);
 }

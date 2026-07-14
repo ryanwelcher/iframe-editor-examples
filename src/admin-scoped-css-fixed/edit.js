@@ -3,13 +3,14 @@
  *
  * The editor styles (editor.css) are scoped to the block's own class,
  * with no `.wp-admin` ancestor. The selector matches in the admin
- * document and inside the canvas iframe alike, so the green banner and
+ * document and the canvas document alike, so the green banner and
  * border are always present.
  */
 import { useBlockProps } from '@wordpress/block-editor';
 import { useState } from '@wordpress/element';
 import { useRefEffect } from '@wordpress/compose';
 import { __ } from '@wordpress/i18n';
+import { BlockHeader } from '../lib/iframe-status';
 
 export default function Edit() {
 	const [ isIframed, setIsIframed ] = useState( false );
@@ -21,15 +22,17 @@ export default function Edit() {
 
 	return (
 		<div { ...useBlockProps( { ref, className: 'ied-admin-scoped-fixed' } ) }>
-			<strong>{ __( '✅ Admin-Scoped CSS (Fixed)', 'iframed-editor-demos' ) }</strong>
+			<BlockHeader isIframed={ isIframed }>
+				{ __( '✅ Admin-Scoped CSS (Fixed)', 'iframed-editor-demos' ) }
+			</BlockHeader>
 			<p>
 				{ isIframed
 					? __(
-							'The canvas IS iframed — and the styling is still here, because the selector describes the block, not the admin chrome.',
+							'The styling is still here, because the selector describes the block, not the admin document.',
 							'iframed-editor-demos'
 					  )
 					: __(
-							'The canvas is NOT iframed right now — the styling applies here too.',
+							'The styling applies here too, for the same reason.',
 							'iframed-editor-demos'
 					  ) }
 			</p>

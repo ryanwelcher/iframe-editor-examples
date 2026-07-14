@@ -6,7 +6,7 @@
 	"title": "Canvas Width (Broken)",
 	"category": "widgets",
 	"icon": "warning",
-	"description": "Reads window.innerWidth from the global window. In the iframed editor it reports the admin window width, not the canvas.",
+	"description": "Reads window.innerWidth from the global window. When the canvas is iframed it reports the admin window width, not the canvas window.",
 	"textdomain": "iframed-editor-demos",
 	"editorScript": "file:./index.js"
 }

@@ -15,7 +15,10 @@
  * that's why this block.json has no $schema property.
  */
 import { useBlockProps } from '@wordpress/block-editor';
+import { useState } from '@wordpress/element';
+import { useRefEffect } from '@wordpress/compose';
 import { __ } from '@wordpress/i18n';
+import { BlockHeader } from '../lib/iframe-status';
 
 const wrapperStyle = {
 	border: '2px dashed #996800',
@@ -24,14 +27,34 @@ const wrapperStyle = {
 };
 
 export default function Edit() {
+	const [ isIframed, setIsIframed ] = useState( false );
+
+	// The canvas is iframed when this block's document is not the admin document.
+	const ref = useRefEffect( ( element ) => {
+		setIsIframed( element.ownerDocument !== document );
+	}, [] );
+
 	return (
-		<div { ...useBlockProps( { style: wrapperStyle } ) }>
-			<strong>{ __( '🕰️ Legacy API v2 Block', 'iframed-editor-demos' ) }</strong>
+		<div { ...useBlockProps( { ref, style: wrapperStyle } ) }>
+			<BlockHeader isIframed={ isIframed }>
+				{ __( '🕰️ Legacy API v2 Block', 'iframed-editor-demos' ) }
+			</BlockHeader>
 			<p>
 				{ __(
-					'In WordPress 7.0, inserting me removes the iframe from the post editor. Watch the Editor Styles Demo block when I arrive — the red banner comes back.',
+					'In WordPress 7.0, inserting me removes the iframe from the post editor. Watch the Editor Styles Demo block when I arrive — its red banner comes back.',
 					'iframed-editor-demos'
 				) }
+			</p>
+			<p>
+				{ isIframed
+					? __(
+							'On WordPress 7.0, inserting me should drop the iframe.',
+							'iframed-editor-demos'
+					  )
+					: __(
+							'On WordPress 7.0, inserting me is what dropped it.',
+							'iframed-editor-demos'
+					  ) }
 			</p>
 		</div>
 	);

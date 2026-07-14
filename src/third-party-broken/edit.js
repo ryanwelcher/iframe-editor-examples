@@ -3,7 +3,7 @@
  *
  * This block hands a selector to a legacy third-party library, and the
  * library looks it up with the global `document.querySelectorAll()`.
- * In the iframed editor the block's markup lives in the iframe's
+ * When the canvas is iframed the block's markup lives in the canvas
  * document, so the library finds ZERO matches and silently no-ops.
  *
  * This is the failure mode for a huge class of older libraries:
@@ -11,8 +11,10 @@
  */
 import { useBlockProps } from '@wordpress/block-editor';
 import { useEffect, useState } from '@wordpress/element';
+import { useRefEffect } from '@wordpress/compose';
 import { __, sprintf } from '@wordpress/i18n';
 import { enhance } from '../lib/legacy-lib';
+import { BlockHeader } from '../lib/iframe-status';
 
 const wrapperStyle = {
 	border: '2px solid #cc1818',
@@ -22,22 +24,29 @@ const wrapperStyle = {
 
 export default function Edit() {
 	const [ found, setFound ] = useState( null );
+	const [ isIframed, setIsIframed ] = useState( false );
+
+	// Detection only — the library below is deliberately called the broken way.
+	const ref = useRefEffect( ( element ) => {
+		setIsIframed( element.ownerDocument !== document );
+	}, [] );
 
 	useEffect( () => {
-		// ❌ The library resolves this selector against the ADMIN document.
+		// ❌ The library resolves this selector against the admin document.
 		setFound( enhance( '.ied-third-party-broken' ) );
 	}, [] );
 
 	return (
 		<div
 			{ ...useBlockProps( {
+				ref,
 				className: 'ied-third-party-broken',
 				style: wrapperStyle,
 			} ) }
 		>
-			<strong>
+			<BlockHeader isIframed={ isIframed }>
 				{ __( '❌ Third-Party Library (Broken)', 'iframed-editor-demos' ) }
-			</strong>
+			</BlockHeader>
 			<p>
 				{ sprintf(
 					/* translators: %s: number of elements the library found. */
@@ -46,10 +55,15 @@ export default function Edit() {
 				) }
 			</p>
 			<p>
-				{ __(
-					'If you can read this without a gold glow, the library came up empty — the canvas is iframed.',
-					'iframed-editor-demos'
-				) }
+				{ isIframed
+					? __(
+							'The library searched the admin document and found nothing here, so there is no gold glow. That is the bug.',
+							'iframed-editor-demos'
+					  )
+					: __(
+							'The block shares the admin document, so the library found it and added the gold glow. It breaks once the canvas is iframed.',
+							'iframed-editor-demos'
+					  ) }
 			</p>
 		</div>
 	);

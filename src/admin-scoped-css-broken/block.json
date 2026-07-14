@@ -6,7 +6,7 @@
 	"title": "Admin-Scoped CSS (Broken)",
 	"category": "widgets",
 	"icon": "warning",
-	"description": "Styles the block with a selector keyed on the admin body class .wp-admin. The canvas iframe body has no such class, so the styling silently vanishes when iframed.",
+	"description": "Styles the block with a selector keyed on the admin body class .wp-admin. The canvas document's body has no such class, so the styling silently vanishes when iframed.",
 	"textdomain": "iframed-editor-demos",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css"
