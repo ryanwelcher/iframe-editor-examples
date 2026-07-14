@@ -33,6 +33,32 @@ function iframed_demos_register_blocks() {
 add_action( 'init', 'iframed_demos_register_blocks' );
 
 /**
+ * Enqueue the "iframe status" editor script.
+ *
+ * This is a standalone editor plugin (not a block) built via a custom webpack
+ * entry point. It shows a persistent notice reporting whether the editor canvas
+ * is currently iframed.
+ */
+function iframed_demos_enqueue_iframe_status() {
+	$asset_file = __DIR__ . '/build/iframe-status/index.asset.php';
+
+	if ( ! file_exists( $asset_file ) ) {
+		return;
+	}
+
+	$asset = require $asset_file;
+
+	wp_enqueue_script(
+		'ied-iframe-status',
+		plugins_url( 'build/iframe-status/index.js', __FILE__ ),
+		$asset['dependencies'],
+		$asset['version'],
+		true
+	);
+}
+add_action( 'enqueue_block_editor_assets', 'iframed_demos_enqueue_iframe_status' );
+
+/**
  * DEMO: The "broken" way to style blocks in the editor.
  *
  * Styles enqueued via enqueue_block_editor_assets load in the ADMIN page,
