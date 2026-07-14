@@ -8,8 +8,8 @@ Companion plugin for the article/video on the iframed post editor changes landin
 | --- | --- |
 | WordPress 6.9 | Console warning (with `SCRIPT_DEBUG`) for blocks registered with `apiVersion` ≤ 2. `block.json` schema only validates `apiVersion: 3`. |
 | WordPress 7.0 | Only blocks **inserted in the post** are checked (previously all *registered* blocks). All inserted blocks v3+ → editor is iframed. Insert one v2 block → iframe removed. Not enforced. |
-| Gutenberg 22.6+ | Iframe **enforced** for block *and* classic themes. |
-| WordPress 7.1 | Iframe **enforced for block themes**, regardless of `apiVersion`. All themes in a future release. |
+| Gutenberg 22.6+ | Iframe **enforced regardless of theme** — the plugin short-circuits the check entirely. |
+| WordPress 7.1 | Iframe **enforced for block themes**, regardless of `apiVersion`. Every other theme keeps the 7.0 rules for now; all themes in a future release. |
 
 ## The demos
 
