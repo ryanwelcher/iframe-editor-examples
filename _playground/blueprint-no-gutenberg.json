@@ -1,0 +1,35 @@
+{
+	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
+	"landingPage": "/wp-admin/post.php?post=900&action=edit",
+	"preferredVersions": {
+		"php": "8.2",
+		"wp": "latest"
+	},
+	"features": {
+		"networking": true
+	},
+	"login": true,
+	"steps": [
+		{
+			"step": "defineWpConfigConsts",
+			"consts": {
+				"WP_DEBUG": true,
+				"SCRIPT_DEBUG": true
+			}
+		},
+		{
+			"step": "installPlugin",
+			"pluginData": {
+				"resource": "url",
+				"url": "https://raw.githubusercontent.com/ryanwelcher/iframe-editor-examples/trunk/iframed-editor-demos.zip"
+			},
+			"options": {
+				"activate": true
+			}
+		},
+		{
+			"step": "runPHP",
+			"code": "<?php require_once '/wordpress/wp-load.php'; $blocks = array( '<!-- wp:paragraph --><p>Every block below shows a status pill: blue when the editor canvas is iframed, grey when it is not. This editor is running the stock WordPress rules (no Gutenberg plugin), so the Legacy API v2 block below is keeping the canvas OUT of the iframe — the pills are grey and the broken blocks appear to work. Delete the Legacy block and watch the canvas reload into an iframe.</p><!-- /wp:paragraph -->', '<!-- wp:iframed-demos/editor-styles /-->', '<!-- wp:iframed-demos/legacy-api-v2 /-->', '<!-- wp:iframed-demos/canvas-width-broken /-->', '<!-- wp:iframed-demos/canvas-width-fixed /-->', '<!-- wp:iframed-demos/click-outside-broken /-->', '<!-- wp:iframed-demos/click-outside-fixed /-->', '<!-- wp:iframed-demos/admin-scoped-css-broken /-->', '<!-- wp:iframed-demos/admin-scoped-css-fixed /-->', '<!-- wp:iframed-demos/third-party-broken /-->', '<!-- wp:iframed-demos/third-party-fixed /-->' ); wp_insert_post( array( 'import_id' => 900, 'post_title' => 'Iframed Editor Demos: broken vs fixed blocks in the WordPress 7.1 editor', 'post_content' => implode( chr(10) . chr(10), $blocks ), 'post_status' => 'draft', 'post_type' => 'post' ) );"
+		}
+	]
+}

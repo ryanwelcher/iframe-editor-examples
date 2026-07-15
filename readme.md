@@ -25,7 +25,7 @@ Companion plugin for the article/video on the iframed post editor changes landin
 ## The demo script
 
 1. Create a new post, insert the **Editor Styles Demo** and both **Canvas Width** blocks.
-2. On WP 7.0 with a classic theme (no Gutenberg plugin): everything is iframed, red banner missing, broken width block lies to you.
+2. On WP 7.0 (no Gutenberg plugin — theme makes no difference here): everything is iframed, red banner missing, broken width block lies to you.
 3. Insert the **Legacy API v2 Block** → the editor de-iframes. The red banner appears, the broken blocks start "working" again. This is the backward-compatibility behavior that goes away.
 4. Activate the Gutenberg plugin (22.6+) or WP 7.1 + block theme → iframe is enforced; the v2 block no longer rescues anything.
 5. Walk the broken/fixed pairs one at a time.
@@ -52,11 +52,13 @@ npx wp-env start --update
 
 ### Try it in Playground
 
-No local setup required — launch the demos in WordPress Playground:
+No local setup required — launch the demos in WordPress Playground. There's a blueprint for each **state**:
 
-**[▶️ Open in Playground](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/ryanwelcher/iframe-editor-examples/trunk/_playground/blueprint.json)**
+**[▶️ Iframe enforced](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/ryanwelcher/iframe-editor-examples/trunk/_playground/blueprint.json)** — installs the Gutenberg plugin, so the canvas is always iframed (the 7.1 experience). Every pill is blue; walk the broken/fixed pairs.
 
-The blueprint (`_playground/blueprint.json`) installs this plugin plus the Gutenberg plugin (so the iframe is enforced) and drops you in a new post. Note: it installs the plugin from the `iframed-editor-demos.zip` committed to this repo (served via `raw.githubusercontent.com`, which sends the CORS headers Playground needs — GitHub release assets don't). Rebuild it with `npm run plugin-zip` and commit the result whenever the blocks change.
+**[▶️ Stock 7.0 rules](https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/ryanwelcher/iframe-editor-examples/trunk/_playground/blueprint-no-gutenberg.json)** — no Gutenberg plugin. The preset Legacy API v2 block keeps the canvas *out* of the iframe (grey pills, broken blocks "work"). Delete it and watch the canvas reload into an iframe.
+
+Both blueprints open a preset post with every demo block inserted. Note: they install the plugin from the `iframed-editor-demos.zip` committed to this repo (served via `raw.githubusercontent.com`, which sends the CORS headers Playground needs — GitHub release assets don't). Rebuild it with `npm run plugin-zip` and commit the result whenever the blocks change.
 
 ## References
 
